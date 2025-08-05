@@ -1,0 +1,1 @@
+    // create Database scripts for interacting with the database using sql2 in Hapi.js

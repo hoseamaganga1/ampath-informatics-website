@@ -4,7 +4,7 @@ require('dotenv').config();
 
 // you can import your routes here
 // For example, if you have a file named example.routes.js in the routes directory
-const exampleRoutes = require('./routes/example.routes');
+const exampleRoutes = require('./routes/example');
 
 const init = async () => {
   const server = Hapi.server({

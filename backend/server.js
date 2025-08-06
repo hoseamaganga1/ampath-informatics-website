@@ -1,10 +1,13 @@
 // server.js
+
 const Hapi = require('@hapi/hapi');
+const {sequelize}=require("./models");
 require('dotenv').config();
 
 // you can import your routes here
 // For example, if you have a file named example.routes.js in the routes directory
-const exampleRoutes = require('./routes/example.routes');
+const adminRoutes = require('./routes/adminRoutes');
+const inviteRoutes =require('./routes/inviteRoutes');
 
 const init = async () => {
   const server = Hapi.server({
@@ -12,7 +15,38 @@ const init = async () => {
     host: 'localhost'
   });
 
-  server.route(exampleRoutes);
+    // Register JWT authentication strategy
+  await server.register(require('@hapi/jwt'));
+
+  server.auth.strategy('jwt', 'jwt', {
+    keys: process.env.JWT_SECRET ,
+    verify: {
+      aud: false,
+      iss: false,
+      sub: false,
+      nbf: true,
+      exp: true
+    },
+    validate: async (artifacts, request, h) => {
+      return {
+        isValid: true,
+        credentials: {
+          id: artifacts.decoded.payload.id,
+          role: artifacts.decoded.payload.role
+        }
+      };
+    }
+  });
+
+  server.auth.default('jwt');
+
+    await sequelize.sync({ alter: true });
+  console.log('Database synced');
+
+
+ server.route(adminRoutes);
+ server.route(inviteRoutes);
+
 
   await server.start();
   console.log(`🚀 Server running on ${server.info.uri}`);

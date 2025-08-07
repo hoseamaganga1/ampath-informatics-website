@@ -1,15 +1,24 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
+import Navbar from './components/Navbar';
+import MainSection from './components/MainSection';
+import InformaticsSection from './components/InformaticsSection';
+import Footer from './components/Footer';
+
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-    <h1 className='text-3xl'>Ampath informatics website</h1>
-    </>
-  )
+    <div className="min-h-screen bg-gray-50">
+
+      <Navbar />
+      <main className="flex-grow">
+        <MainSection />
+        <InformaticsSection />
+      </main>
+     
+      <Footer />
+      
+    </div>
+  );
 }
 
-export default App
+export default App;

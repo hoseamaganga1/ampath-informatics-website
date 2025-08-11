@@ -33,20 +33,20 @@ const MainSection = () => {
   }, []);
 
   return (
-    <>
-    <div className="relative w-full h-[90vh] mt-0 overflow-hidden ">
-    
+    <div className="relative w-full h-[90vh] mt-0 overflow-hidden">
+      <div className="absolute top-0 left-0 w-full h-full flex justify-center align-middle overflow-hidden">
       <video
-        className="absolute top-0 left-0 w-full h-full object-cover"
+        // className="absolute top-0 left-0 h-full w-full object-cover"
+        className='w-full h-full object-cover scale-[1.15] md:scale-100 overflow-hidden'
         src="/src/assets/Video.mp4"
         autoPlay
         muted
         loop
         playsInline
+        style={{objectFit: "cover" }}
       />
-      {/* <video autoplay muted loop playsinline>
-      <source src="/src/assets/Video.mp4" type="video/mp4">
-      </source></video> */}
+      {/* <VidCar /> */}
+      </div>
 
       
       <div className="absolute inset-0 bg-white bg-opacity-50"></div>
@@ -61,12 +61,8 @@ const MainSection = () => {
           {messages[currentIndex].comment}
         </p>
       </div>
-      
+      {/* <InformaticsSection /> */}
     </div>
-    {/* <div className='flex justify-center items-center text-9xl' style={{height:'20vh'}}>...</div> */}
-    <InformaticsSection />
-    <Footer />
-    </>
   );
 };
 

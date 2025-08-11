@@ -2,3 +2,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.hm-video-src video{
+    background: url('/src/assets/Video.mp4') no-repeat center center;
+    background-size: cover;
+}
+
+/*  .hm-video-src not playing video when used as style */

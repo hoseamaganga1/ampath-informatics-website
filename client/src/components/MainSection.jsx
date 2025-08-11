@@ -33,7 +33,8 @@ const MainSection = () => {
   }, []);
 
   return (
-    <div className="relative w-full h-[80vh] mt-0 overflow-hidden">
+    <>
+    <div className="relative w-full h-[90vh] mt-0 overflow-hidden ">
     
       <video
         className="absolute top-0 left-0 w-full h-full object-cover"
@@ -43,6 +44,9 @@ const MainSection = () => {
         loop
         playsInline
       />
+      {/* <video autoplay muted loop playsinline>
+      <source src="/src/assets/Video.mp4" type="video/mp4">
+      </source></video> */}
 
       
       <div className="absolute inset-0 bg-white bg-opacity-50"></div>
@@ -57,9 +61,12 @@ const MainSection = () => {
           {messages[currentIndex].comment}
         </p>
       </div>
-      < InformaticsSection />
-      <Footer />
+      
     </div>
+    {/* <div className='flex justify-center items-center text-9xl' style={{height:'20vh'}}>...</div> */}
+    <InformaticsSection />
+    <Footer />
+    </>
   );
 };
 

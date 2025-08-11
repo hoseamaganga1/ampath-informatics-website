@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import amrsIcon from '../assets/icons/AMRS.png';
 import aptIcon from '../assets/icons/APT.png';
 import listIcon from '../assets/icons/list.png';
@@ -26,23 +26,16 @@ const informaticsServices = [
     description: "Seamless connection of various health platforms, apps, and databases.",
   },
 ];
+// 
 
 const InformaticsSection = () => {
   return (
-    <section className="py-16 bg-gray-100">
+    <section className="hm-services-0 py-16 bg-gray-100">
       <div className="max-w-7xl mx-auto px-6 text-center">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
           {informaticsServices.map((service, index) => (
-            <div
-              key={index}
-              className="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition duration-300"
-            >
-              
-              <img
-                src={service.icon}
-                alt={service.title}
-                className="w-16 h-16 mx-auto mb-4 object-contain"
-              />
+            <div key={index} className={`hm-services-${index + 1} bg-white p-6 rounded-2xl shadow hover:shadow-lg transition duration-300`} >
+              <img src={service.icon} alt={service.title} className="w-16 h-16 mx-auto mb-4 object-contain" />
               <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
               <p className="text-gray-600 text-sm">{service.description}</p>
             </div>

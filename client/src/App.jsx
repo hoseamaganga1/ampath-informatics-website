@@ -20,14 +20,26 @@ import SysDoucumentation from './pages/SysDoc';
 import DtoolsnScripts from './pages/Scripts';
 import NewsnUpdates from './pages/News';
 import ContactUs from './pages/Contact';
+import { useEffect } from 'react';
 
 function App() {
+    useEffect(() => {
+      if (window.ScrollReveal) {
+        window.ScrollReveal().reveal('.hm-nav', {origin:'top', distance:'70px', delay: 0, duration: 1000, easing: 'ease-in-out' });
+        window.ScrollReveal().reveal('.hm-services-1', {origin:'left', distance:'500px', delay: 100, duration: 700, easing: 'ease-in-out' });
+        window.ScrollReveal().reveal('.hm-services-2', {origin:'left', distance:'500px', delay: 0, duration: 700, easing: 'ease-in-out' });
+        window.ScrollReveal().reveal('.hm-services-3', {origin:'right', distance:'500px', delay: 0, duration: 700, easing: 'ease-in-out' });
+        window.ScrollReveal().reveal('.hm-services-4', {origin:'right', distance:'500px', delay: 100, duration: 700, easing: 'ease-in-out' });
+
+      }
+    }, []);
+  
   return (
     <Router> 
         <Navbar />
         <Routes>
-          <Route path="/Main" element={<Main />} />
-          <Route path="/Aboutus" element={<Aboutus />} />
+          <Route path="/" element={<Main />} />
+          <Route path="/aboutus" element={<Aboutus />} />
           <Route path="/developers" element={<Developers />} />
           <Route path="/systemadmins" element={<SystemAdmins />} />
           <Route path="/qualityassurance" element={<QualityAssurance />} />

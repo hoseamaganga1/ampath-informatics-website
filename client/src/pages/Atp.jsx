@@ -1,4 +1,3 @@
-
 const ATP = () => {
   return (
     <div className="min-h-screen p-8 text-center">

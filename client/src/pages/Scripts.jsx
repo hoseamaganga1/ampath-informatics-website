@@ -28,7 +28,7 @@
 
 const DtoolsnScripts = () => {
   return (
-    <section className="w-full bg-white py-16 px-6">
+    <section className="w-full bg-white py-16 px-6 min-h-screen">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-4xl font-bold text-center text-[#007b83] mb-4">
           Downloadable Tools & Scripts

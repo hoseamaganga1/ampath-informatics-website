@@ -20,29 +20,13 @@ import SysDoucumentation from './pages/SysDoc';
 import DtoolsnScripts from './pages/Scripts';
 import NewsnUpdates from './pages/News';
 import ContactUs from './pages/Contact';
-import { useEffect } from 'react';
 
 function App() {
-    useEffect(() => {
-      if (window.ScrollReveal) {
-        window.ScrollReveal().reveal('.hm-nav', {origin:'top', distance:'70px', delay: 0, easing: 'ease-in-out', opacity:0 });
-        // window.ScrollReveal().reveal('.hm-mobile-sidebar', {origin:'left', distance:'70px', delay: 3000, duration: 700, easing: 'ease-in-out' });
-        // 
-        window.ScrollReveal().reveal('.hm-services-1', {origin:'left', distance:'500px', delay: 100, duration: 1000, easing: 'ease-in-out' });
-        window.ScrollReveal().reveal('.hm-services-2', {origin:'left', distance:'500px', delay: 0, duration: 1000, easing: 'ease-in-out' });
-        window.ScrollReveal().reveal('.hm-services-3', {origin:'right', distance:'500px', delay: 0, duration: 1000, easing: 'ease-in-out' });
-        window.ScrollReveal().reveal('.hm-services-4', {origin:'right', distance:'500px', delay: 100, duration: 1000, easing: 'ease-in-out' });
-
-        //  footer
-        // window.ScrollReveal().reveal('.hm-footer', {opacity:0.9, origin:'bottom', distance:'0px', delay: 100, duration: 700, easing: 'ease-in-out' });
-      }
-    }, []);
-
-    return (
+  return (
     <Router> 
         <Navbar />
         <Routes>
-          <Route path="/" element={<Main />} />
+          <Route path="/Main" element={<Main />} />
           <Route path="/Aboutus" element={<Aboutus />} />
           <Route path="/developers" element={<Developers />} />
           <Route path="/systemadmins" element={<SystemAdmins />} />

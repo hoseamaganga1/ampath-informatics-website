@@ -1,49 +1,28 @@
-const sops = [
-  {
-    title: 'Patient Registration SOP',
-    description: 'Step-by-step guidelines on how to register patients into the AMPATH EMR system.',
-    file: '/docs/patient-registration-sop.pdf',
-  },
-  {
-    title: 'Triage Protocol',
-    description: 'Standard procedures for triaging patients effectively and safely.',
-    file: '/docs/triage-protocol.pdf',
-  },
-  {
-    title: 'Laboratory Request Guideline',
-    description: 'Guidelines for clinicians on ordering, receiving, and reviewing lab results.',
-    file: '/docs/lab-guidelines.pdf',
-  },
-  {
-    title: 'Pharmacy Dispensing SOP',
-    description: 'Standard procedure for drug dispensing and reconciliation in the pharmacy module.',
-    file: '/docs/pharmacy-sop.pdf',
-  },
-];
-
-const media = [
-  {
-    type: 'video',
-    src: '/media/sop-overview.mp4',
-    alt: 'SOP Overview Video',
-  },
-  {
-    type: 'image',
-    src: '/media/sop-screenshot.png',
-    alt: 'Sample SOP Layout',
-  },
-];
+import React, { useState, useEffect } from "react";
 
 const SOPs = () => {
+  const [sops, setSops] = useState([]);
+  const [media, setMedia] = useState([]);
+
+  useEffect(() => {
+    fetch("/api/sops")
+      .then((res) => res.json())
+      .then((data) => setSops(data));
+
+    fetch("/api/sops/media")
+      .then((res) => res.json())
+      .then((data) => setMedia(data));
+  }, []);
+  
   return (
-     <section className="w-full bg-white py-16 px-6">
+    <section className="w-full bg-white py-16 px-6 min-h-screen">
       <div className="max-w-7xl mx-auto">
         {/* Title */}
         <h2 className="text-4xl font-bold text-center text-[#007b83] mb-6">
           SOPs & Guidelines
         </h2>
 
-        {/* Introduction */}
+        {/* Intro */}
         <p className="text-center text-gray-700 max-w-3xl mx-auto mb-12">
           Standard Operating Procedures (SOPs) ensure consistent, safe, and efficient use of the AMPATH systems. This section provides easy access to official guidelines, workflows, and learning media for day-to-day system users.
         </p>
@@ -86,7 +65,7 @@ const SOPs = () => {
               key={index}
               className="bg-gray-50 p-4 rounded-lg shadow hover:shadow-xl transition"
             >
-              {item.type === 'image' ? (
+              {item.type === "image" ? (
                 <img
                   src={item.src}
                   alt={item.alt}

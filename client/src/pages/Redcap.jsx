@@ -39,7 +39,7 @@ const redcapResources = [
 
 const REDCap = () => {
   return (
-     <section className="w-full py-16 px-6 bg-white">
+     <section className="w-full py-16 px-6 bg-white min-h-screen">
       <div className="max-w-7xl mx-auto">
         {/* Heading */}
         <h2 className="text-4xl font-bold text-center text-[#c62828] mb-6">

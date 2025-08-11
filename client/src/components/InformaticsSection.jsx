@@ -35,7 +35,7 @@ const InformaticsSection = () => {
           {informaticsServices.map((service, index) => (
             <div
               key={index}
-              className={`hm-services-${index + 1} bg-white p-6 rounded-2xl shadow hover:shadow-lg transition duration-300`}
+              className="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition duration-300"
             >
               
               <img

@@ -16,7 +16,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="hm-nav w-full shadow-md bg-[#00A36C] text-white py-4 relative z-50 lg:pe-20 h-[10vh]">
+    <div className="w-full shadow-md bg-[#00A36C] text-white py-4 relative z-50">
       <div className="flex">
         {/* Main Navbar Content */}
         <div className="flex-1 px-6 w-full relative">
@@ -30,11 +30,11 @@ const Navbar = () => {
 
             {/* Mobile: Search + Hamburger */}
             <div className="flex items-center space-x-4 lg:hidden">
-              {/* <img
+              <img
                 src="/src/assets/search2.png"
                 alt="Search"
                 className="h-6 w-6 cursor-pointer hover:opacity-80"
-              /> */}
+              />
               <button
                 className="text-white focus:outline-none"
                 onClick={() => setMenuOpen(!menuOpen)}
@@ -58,6 +58,7 @@ const Navbar = () => {
 
             {/* Desktop Nav Links */}
             <div className="hidden lg:flex items-center justify-center space-x-6 text-white font-medium relative">
+              <Link to="/Aboutus" className="hover:text-gray-200">ABOUT US</Link>
 
               <div className="relative group">
                 <Link to="#" className="hover:text-gray-200">TEAMS</Link>
@@ -94,22 +95,22 @@ const Navbar = () => {
               <Link to="/NewsnUpdates" className="hover:text-gray-200">NEWS & UPDATES</Link>
               <Link to="/ContactUs" className="hover:text-gray-200">CONTACT US</Link>
 
-              <Link to="/Aboutus" className="hover:text-gray-200">ABOUT US</Link>
-              {/* <img
+             
+              <img
                 src="/src/assets/search2.png"
                 alt="Search"
                 className="h-6 w-6 cursor-pointer hover:opacity-80"
-              /> */}
+              />
             </div>
           </div>
         </div>
 
-        {/* <div className="hidden lg:block lg:w-1/6"></div> */}
+        <div className="hidden lg:block lg:w-1/6"></div>
       </div>
 
       {/* Mobile Sidebar */}
       {menuOpen && (
-        <div className=" absolute top-0 left-0 h-screen w-1/3 bg-[#22c78f] z-50 p-6 lg:hidden transition-all duration-300 ease-in-out overflow-y-auto">
+        <div className="absolute top-0 left-0 h-screen w-1/3 bg-[#22c78f] z-50 p-6 lg:hidden transition-all duration-300 ease-in-out overflow-y-auto">
           <nav className="flex flex-col space-y-4 text-white font-medium">
             <Link to="/Aboutus" className="hover:text-gray-200">ABOUT US</Link>
 

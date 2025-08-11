@@ -27,24 +27,28 @@ const MainSection = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex(prev => (prev + 1) % messages.length);
-    }, 4000); // change every 4s
+    }, 4000); 
 
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="relative w-full h-[80vh] mt-0 overflow-hidden">
-      {/* Background Video */}
+    <div className="relative w-full h-[90vh] mt-0 overflow-hidden">
+      <div className="absolute top-0 left-0 w-full h-full flex justify-center align-middle overflow-hidden">
       <video
-        className="absolute top-0 left-0 w-full h-full object-cover"
+        // className="absolute top-0 left-0 h-full w-full object-cover"
+        className='w-full h-full object-cover scale-[1.15] md:scale-100 overflow-hidden'
         src="/src/assets/Video.mp4"
         autoPlay
         muted
         loop
         playsInline
+        style={{objectFit: "cover" }}
       />
+      {/* <VidCar /> */}
+      </div>
 
-      {/* Fading overlays */}
+      
       <div className="absolute inset-0 bg-white bg-opacity-50"></div>
       <div className="absolute inset-0 bg-black bg-opacity-40"></div>
 
@@ -57,8 +61,7 @@ const MainSection = () => {
           {messages[currentIndex].comment}
         </p>
       </div>
-      < InformaticsSection />
-      <Footer />
+      {/* <InformaticsSection /> */}
     </div>
   );
 };

@@ -1,56 +1,41 @@
-const { invite } = require('../models');
-const { v4: uuidv4 } = require('uuid');
 const nodemailer = require('nodemailer');
+const { v4: uuidv4 } = require('uuid');
 
-// Send invite to register an admin
-exports.sendAdminInvite = async (request, h) => {
+// Setup Nodemailer transporter with env vars
+const transporter = nodemailer.createTransport({
+  host: process.env.SMTP_HOST,
+  port: +process.env.SMTP_PORT,
+  secure: process.env.SMTP_SECURE === 'true',
+  auth: {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
+  },
+});
+
+exports.sendInvite = async (request, h) => {
+  const { email } = request.payload;
+
+  if (!email) {
+    return h.response({ error: 'Email is required' }).code(400);
+  }
+
   try {
-    const { role } = request.auth.credentials;
-    if (role !== 'admin') {
-      return h.response({ error: 'Unauthorized' }).code(403);
-    }
-
-    const { email } = request.payload;
-
-    // Generate token and expiration time (24 hrs)
     const token = uuidv4();
-    const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
+    const inviteUrl = `${process.env.APP_BASE_URL}/register?inviteToken=${token}`;
 
-    // Save or update invite in DB using upsert
-    await invite.upsert({
-      email,
-      token,
-      expires_at: expiresAt,
-      used: false
-    });
-
-    // Setup Nodemailer transporter
-    const transporter = nodemailer.createTransport({
-      service: 'Gmail',
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASSWORD
-      }
-    });
-
-    // Construct registration link
-    const registrationUrl = `${process.env.FRONTEND_URL}/admin-register?token=${token}&email=${encodeURIComponent(email)}`;
-
-    // Send email
-    await transporter.sendMail({
-      from: `"Ampath Informatics" <${process.env.EMAIL_USER}>`,
+    const mailOptions = {
+      from: `"Admin invite" <${process.env.SMTP_USER}>`,
       to: email,
-      subject: 'Admin Invitation',
-      html: `
-        <p>You have been invited to register as an admin.</p>
-        <p>Please click the link below to complete your registration. This link will expire in 24 hours:</p>
-        <p><a href="${registrationUrl}">${registrationUrl}</a></p>
-      `
-    });
+      subject: 'You are invited to register as admin',
+      text: `Click the link to register: ${inviteUrl}`,
+      html: `<p>Click the link to register: <a href="${inviteUrl}">${inviteUrl}</a></p>`,
+    };
 
-    return h.response({ message: 'Invitation sent successfully' }).code(200);
-  } catch (err) {
-    console.error('Invite Error:', err);
-    return h.response({ error: err.message }).code(500);
+    await transporter.sendMail(mailOptions);
+
+    return h.response({ message: 'Invite email sent successfully' }).code(200);
+  } catch (error) {
+    console.error('Error sending invite:', error);
+    return h.response({ error: 'Server error' }).code(500);
   }
 };

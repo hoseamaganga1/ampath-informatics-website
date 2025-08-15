@@ -28,9 +28,9 @@ function AdminLogin() {
         console.log("Login success:", res.data);
 
         // Save token to localStorage
-        localStorage.setItem("adminToken", res.data.token);
+        localStorage.setItem("token", res.data.token);
 
-        // Redirect to dashboard
+        // Redirect to admin dashboard
         navigate("/admindashboardmenu");
       } else {
         setError("Invalid login response. Please try again.");

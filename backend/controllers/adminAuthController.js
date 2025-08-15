@@ -125,3 +125,27 @@ exports.deleteUser = async (request, h) => {
     return h.response({ error: 'An error occurred while deleting the user.' }).code(500);
   }
 };
+exports.getUser = async (request, h) => {
+  try {
+    const { role } = request.auth.credentials;
+
+    // Only admins can access user data
+    if (role !== 'admin') {
+      return h.response({ error: 'Access denied. Admins only.' }).code(403);
+    }
+
+    const userId = request.params.id;
+    const user = await Admin.findByPk(userId, {
+      attributes: ['id', 'name', 'email', 'role'] // Specify the fields you want to return
+    });
+
+    if (!user) {
+      return h.response({ error: 'User not found' }).code(404);
+    }
+
+    return h.response(user).code(200);
+  } catch (err) {
+    console.error('Get user error:', err);
+    return h.response({ error: 'An error occurred while retrieving the user.' }).code(500);
+  }
+};
